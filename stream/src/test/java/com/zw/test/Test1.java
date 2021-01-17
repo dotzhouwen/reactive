@@ -1,11 +1,7 @@
 package com.zw.test;
 
 import org.junit.Test;
-
-import java.util.function.BiFunction;
-import java.util.function.BinaryOperator;
-import java.util.function.Function;
-import java.util.function.UnaryOperator;
+import java.util.function.*;
 
 public class Test1 {
 
@@ -50,4 +46,56 @@ public class Test1 {
         System.out.println(applyMin);
         System.out.println(applyMax);
     }
+
+    @Test
+    public void test06() {
+        Consumer<String> con = str -> System.out.println("hello:" + str);
+        con.accept("Tom");
+    }
+
+    @Test
+    public void test07() {
+        Consumer<Integer> con = n -> System.out.println(n * 2);
+        Consumer<Integer> con2 = n -> System.out.println(n * n);
+        con.andThen(con2).accept(5);
+    }
+
+    @Test
+    public void test08() {
+        Supplier<String> sup = () -> "Lambda";
+        System.out.println(sup.get());
+    }
+
+    @Test
+    public void test09() {
+        Function<Integer, String> function = n -> "I love " + n;
+        String apply = function.apply(20);
+        System.out.println(apply);
+    }
+
+    @Test
+    public void test10() {
+        Function<Integer, Integer> fun1 = x -> x * 2;
+        Function<Integer, Integer> fun2 = x -> x * x;
+        Integer apply = fun1.andThen(fun2).apply(3);
+        System.out.println(apply);
+
+        Integer apply1 = fun1.compose(fun2).apply(3);
+        System.out.println(apply1);
+    }
+
+    @Test
+    public void test11() {
+        Function<Integer, Integer> identity = Function.identity();
+        System.out.println(identity.apply(3));
+    }
+
+    @Test
+    public void test12() {
+        UnaryOperator<Integer> unaryOperator = x -> x * 2;
+        Integer apply = unaryOperator.apply(10);
+        System.out.println(apply);
+    }
+
+
 }
