@@ -11,6 +11,7 @@
     <modules>
         <module>stream</module>
         <module>webflux-helloworld</module>
+        <module>webflux-demo1</module>
     </modules>
 
     <parent>
